@@ -1,0 +1,16 @@
+FROM node:14-alpine AS base
+WORKDIR /myapp
+RUN apk apk update && apk upgrade && apk update
+COPY ./client .
+RUN yarn install
+##############################prod##############################
+FROM base AS production
+ENV NODE_ENV production
+RUN npm run build
+EXPOSE 3000
+CMD [ "yarn", "start" ]
+##############################Dev##############################
+FROM base AS development
+ENV NODE_ENV development
+EXPOSE 3000
+CMD [ "yarn", "start" ]

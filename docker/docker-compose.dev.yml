@@ -1,0 +1,50 @@
+---
+version: '3.8'
+services:
+  react:
+    build:
+      target: development
+    image: react-dev-${PROJECT_NAME}
+    container_name: react-dev-${PROJECT_NAME}
+    restart: always
+    volumes:
+      - ../client/src:/myapp/src:z
+      - ../client/public:/myapp/public:z
+      - ../client/build:/myapp/build:z
+  nodejs:
+    build:
+      target: development
+    image: nodejs-dev-${PROJECT_NAME}
+    container_name: nodejs-dev-${PROJECT_NAME}
+    ports:
+      - target: 4000
+        published: ${DD_PORT:-4000}
+        protocol: tcp
+        mode: host
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      DD_DATABASE_NAME: ${DD_DEV_DATABASE_NAME}
+    volumes:
+      - ../server/:/myapp/:z
+  mysql:
+    container_name: mysql-dev-${PROJECT_NAME}
+    environment:
+      MYSQL_DATABASE: ${DD_DEV_DATABASE_NAME}
+    restart: always
+    volumes:
+      - dev_data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    restart: always
+    ports:
+      - 8081:80
+volumes:
+  dev_data: {}

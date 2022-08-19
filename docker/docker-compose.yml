@@ -1,0 +1,46 @@
+---
+version: '3.8'
+services:
+  react:
+    build:
+      context: ../
+      dockerfile: ./docker/dockerfiles/Dockerfile.react
+      target: base
+    image: react-base-${PROJECT_NAME}
+    container_name: react-base-${PROJECT_NAME}
+    depends_on:
+      - nodejs
+    ports:
+      - target: 3000
+        published: ${DD_PORT:-3000}
+        protocol: tcp
+        mode: host
+  nodejs:
+    build:
+      context: ../
+      dockerfile: ./docker/dockerfiles/Dockerfile.nodejs
+      target: base
+    image: nodejs-base-${PROJECT_NAME}
+    container_name: nodejs-base-${PROJECT_NAME}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      DD_DATABASE_USER: ${DD_DATABASE_USER}
+      DD_DATABASE_HOST: ${DD_DATABASE_HOST}
+      DD_DATABASE_PASSWORD: ${DD_DATABASE_PASSWORD}
+      DD_DATABASE_DIALECT: ${DD_DATABASE_DIALECT}
+    links:
+      - mysql
+  mysql:
+    image: mysql:5.7.37@sha256:66d52e6baa8093820c09fec56992a5ee734f17e9fad8ef5ffc31597b231bd048
+    container_name: mysql-base-${PROJECT_NAME}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${DD_DATABASE_USER}
+      MYSQL_PASSWORD: ${DD_DATABASE_PASSWORD}
+      DD_DATABASE_DIALECT: ${DD_DATABASE_DIALECT}
+    command:
+      [
+        'mysqld',
+        '--character-set-server=utf8mb4',
+        '--collation-server=utf8mb4_unicode_ci'
+      ]
