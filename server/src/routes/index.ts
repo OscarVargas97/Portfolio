@@ -1,11 +1,11 @@
 import express from 'express'
 import errorRoutes from './errors'
-import tasksRoutes from './tasks'
+import userRoutes from './user'
 
 const router = express.Router()
 
 // Here add all routes
-router.use('/tasks', tasksRoutes)
+router.use('/user', userRoutes)
 router.use('/', errorRoutes)
 
 
