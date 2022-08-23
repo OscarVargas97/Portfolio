@@ -1,6 +1,6 @@
 import * as services from '../services/user/user.services'
 import * as dto from '../db/dto/user.dto'
-import { HttpResponse } from '../services/shared/http.response'
+import { HttpResponse } from '../services/shared/http.response.services'
 //import { UserAttributes, UserOutput } from '../models/user.model'
 import { Request, Response } from 'express'
 
