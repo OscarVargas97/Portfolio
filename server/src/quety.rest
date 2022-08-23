@@ -1,7 +1,9 @@
 
-POST http://localhost:4000/api/tasks
+POST http://localhost:4000/api/user
 Content-Type: application/json
 
 {
-	"name":"roberto"
+	"username":"roberto",
+	"password":"pepin",
+	"email":"roberto@gmail.com"
 }
