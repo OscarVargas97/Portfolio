@@ -27,7 +27,7 @@ services:
     environment:
       DD_DATABASE_NAME: ${DD_DEV_DATABASE_NAME}
     volumes:
-      - ../server/:/myapp/:z
+      - ../server/src:/myapp/src:z
   mysql:
     container_name: mysql-dev-${PROJECT_NAME}
     environment:
