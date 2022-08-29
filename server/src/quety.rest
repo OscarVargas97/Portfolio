@@ -1,9 +1,25 @@
-
-POST http://localhost:4000/api/user
+POST http://localhost:4000/api/user/
 Content-Type: application/json
 
 {
-	"username":"roberto",
-	"password":"pepin",
+	"username":"jijijiji",
+	"password":"popo",
 	"email":"roberto@gmail.com"
 }
+
+
+
+
+
+DELETE  http://localhost:4000/api/user/1
+
+
+PUT http://localhost:4000/api/user/1
+Content-Type: application/json
+
+{
+	"username":"jijijiji",
+	"password":"popo",
+	"email":"roberto@gmail.com"
+}
+
