@@ -12,14 +12,14 @@ services:
     image: nodejs-prod-${PROJECT_NAME}
     container_name: nodejs-prod-${PROJECT_NAME}
     environment:
-      DD_DATABASE_NAME: ${DD_DATABASE_NAME}
+      DD_DATABASE_NAME: ${DATABASE_NAME}
     command: npx sequelize db:migrate
     depends_on:
       - mysql
   mysql:
     container_name: mysql-prod-${PROJECT_NAME}
     environment:
-      MYSQL_DATABASE: ${DD_DATABASE_NAME}
+      MYSQL_DATABASE: ${DATABASE_NAME}
     volumes:
       - prod_data:/var/lib/mysql
 volumes:

@@ -3,7 +3,7 @@
 project_name=portfolio
 ##Docker images
 dockerfile=(react nodejs)
-download_image=(phpmyadmin/phpmyadmin mysql:5.7.37)
+download_image=(phpmyadmin/phpmyadmin mysql:5.7.38)
 
 
 #Preferentemente no editar, a menos que desees cambiar la posicion de archivos
