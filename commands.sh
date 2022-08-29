@@ -1,8 +1,8 @@
 #!/bin/bash
 source ./config.sh
 # Commands
-attachdjango(){
-	docker exec -it django-dev-repaso sh
+shnodejs(){
+	docker exec -it nodejs-dev-$project_name sh
 }
 pdownall(){
 	compose clear clear
