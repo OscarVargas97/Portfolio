@@ -2,12 +2,17 @@ import * as services from '../services/user/user.services'
 import * as dto from '../db/dto/user.dto'
 import { HttpResponse } from '../services/shared/http.response.services'
 import { Request, Response } from 'express'
+import SignToken from '../services/shared/signtoken.services'
 
 
 export const create = async (req: Request, res: Response): Promise<Response> => {
 	const id = req.body as dto.CreateUserDTO
+	//const secret: String = process.env.JSW_SECRET
 	try {
-		return HttpResponse.Ok(res, await services.create(id))
+		const user = await services.create(id)
+		const sing = await SignToken(user.id)
+		console.log(sing)
+		return HttpResponse.Ok(res, sing)
 	}
 	catch {
 		return HttpResponse.NotFound(res, "User not create")

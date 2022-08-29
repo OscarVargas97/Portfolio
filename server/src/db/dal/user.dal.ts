@@ -4,6 +4,14 @@ import { GetAllFilters } from './types.dal'
 import { UserInput, UserOutput } from '../../models/user.model'
 
 export const create = async (payload: UserInput): Promise<UserOutput> => {
+	const username = await User.findAll({
+		where: {
+			email: payload.email
+		}
+	})
+	if (username.length) {
+		throw new Error('usuario ya existe')
+	}
 	return await User.create(payload)
 }
 

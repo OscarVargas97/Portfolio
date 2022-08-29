@@ -7,6 +7,7 @@ export interface UserAttributes {
 	email: string;
 	username: string;
 	password: string;
+	salt: string;
 	createdAt?: Date;
 	updatedAt?: Date;
 	deletedAt?: Date;
@@ -20,6 +21,7 @@ class User extends Model<UserAttributes, UserInput> implements UserAttributes {
 	public email!: string;
 	public username!: string;
 	public password!: string;
+	public salt!: string;
 	public readonly createdAt!: Date;
 	public readonly updatedAt!: Date;
 	public readonly deletedAt!: Date;
@@ -40,6 +42,10 @@ User.init({
 		allowNull: false
 	},
 	password: {
+		type: DataTypes.STRING,
+		allowNull: false
+	},
+	salt: {
 		type: DataTypes.STRING,
 		allowNull: false
 	},
