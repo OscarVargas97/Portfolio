@@ -1,8 +1,8 @@
 import express from 'express'
 import morgan from 'morgan'
 import * as dotenv from 'dotenv';
-import indexRoutes from './routes/index'
-import * as database from './db/database'
+import indexRoutes from './routes'
+import * as database from './database'
 
 // initializations
 const app = express()
@@ -18,7 +18,7 @@ app.use(express.json())
 database.connect()
 
 // Routes
-app.use('/api', indexRoutes)
+app.use('/', indexRoutes)
 dotenv.config();
 
 // Starting the Server

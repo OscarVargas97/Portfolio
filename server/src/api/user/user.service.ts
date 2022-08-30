@@ -1,6 +1,6 @@
-import * as userDal from '../../db/dal/user.dal'
-import { GetAllFilters } from '../../db/dal/types.dal'
-import { UserInput, UserOutput } from '../../models/user.model'
+import * as userDal from './dal/user'
+import { GetAllFilters } from './dal/types'
+import { UserInput, UserOutput } from './user.model'
 import bcrypt from 'bcrypt'
 
 export const create = async (payload: UserInput): Promise<UserOutput> => {
@@ -23,6 +23,9 @@ export const getById = (id: number): Promise<UserOutput> => {
 }
 export const deleteById = (id: number): Promise<boolean> => {
 	return userDal.deleteById(id)
+}
+export const getByEmail = (email: string): Promise<UserOutput> => {
+	return userDal.getByEmail(email)
 }
 export const getAll = (filters: GetAllFilters): Promise<UserOutput[]> => {
 	return userDal.getAll(filters)

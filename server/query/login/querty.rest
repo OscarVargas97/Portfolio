@@ -1,0 +1,19 @@
+
+POST http://localhost:4000/api/login/
+Content-Type: application/json
+
+{
+	"password":"vargas",
+	"email":"oscar@gmail.com"
+}
+
+###
+
+GET http://localhost:4000/api/login/lele
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjYxODE1ODkzfQ.PkxUlhyeowgE5nLIdEhvqfdAsPSAjn9w_mgydrVMy7w
+
+{
+	"password":"vargas",
+	"email":"oscar@gmail.com"
+}

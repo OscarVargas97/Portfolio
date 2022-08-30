@@ -1,6 +1,6 @@
 'use strict'
 import { DataTypes, Model, Optional } from 'sequelize';
-import { sequelizeConnection } from '../db/database'
+import { sequelizeConnection } from '../../database'
 
 export interface UserAttributes {
 	id: number;
@@ -35,11 +35,13 @@ User.init({
 	},
 	email: {
 		type: DataTypes.STRING,
-		allowNull: false
+		allowNull: false,
+		unique: true
 	},
 	username: {
 		type: DataTypes.STRING,
-		allowNull: false
+		allowNull: false,
+		unique: true
 	},
 	password: {
 		type: DataTypes.STRING,

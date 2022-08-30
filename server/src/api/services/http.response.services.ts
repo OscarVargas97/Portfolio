@@ -25,21 +25,21 @@ export const HttpResponse = {
 		})
 	},
 	Unauthorized: async (res: Response, data?: any): Promise<Response> => {
-		return res.status(HttpStatus.OK.code).send({
+		return res.status(HttpStatus.UNAUTHORIZED.code).send({
 			status: HttpStatus.UNAUTHORIZED.code,
 			statusMsg: HttpStatus.UNAUTHORIZED.msg,
 			data: await data
 		})
 	},
 	Forbidden: async (res: Response, data?: any): Promise<Response> => {
-		return res.status(HttpStatus.OK.code).send({
+		return res.status(HttpStatus.FORBIDDEN.code).send({
 			status: HttpStatus.FORBIDDEN.code,
 			statusMsg: HttpStatus.FORBIDDEN.msg,
 			data: await data
 		})
 	},
 	InternalServerError: async (res: Response, data?: any): Promise<Response> => {
-		return res.status(HttpStatus.OK.code).send({
+		return res.status(HttpStatus.INTERNAL_SERVER_ERROR.code).send({
 			status: HttpStatus.INTERNAL_SERVER_ERROR.code,
 			statusMsg: HttpStatus.INTERNAL_SERVER_ERROR.msg,
 			data: await data

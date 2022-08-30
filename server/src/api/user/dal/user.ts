@@ -1,17 +1,9 @@
 import { Op } from 'sequelize'
-import { User } from '../../models'
-import { GetAllFilters } from './types.dal'
-import { UserInput, UserOutput } from '../../models/user.model'
+import { User } from '../../index.model'
+import { GetAllFilters } from './types'
+import { UserInput, UserOutput } from '../user.model'
 
 export const create = async (payload: UserInput): Promise<UserOutput> => {
-	const username = await User.findAll({
-		where: {
-			email: payload.email
-		}
-	})
-	if (username.length) {
-		throw new Error('usuario ya existe')
-	}
 	return await User.create(payload)
 }
 
@@ -35,6 +27,14 @@ export const deleteById = async (id: number): Promise<boolean> => {
 	return !!await User.destroy({
 		where: { id }
 	})
+}
+
+export const getByEmail = async (email: string): Promise<UserOutput> => {
+	return await User.findOne({
+		where: {
+			email: email
+		}
+	}) as UserOutput
 }
 
 export const getAll = async (filters?: GetAllFilters): Promise<UserOutput[]> => {
